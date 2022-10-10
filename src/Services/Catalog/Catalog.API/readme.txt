@@ -12,7 +12,12 @@
 5. Runcommand to stop docker-compose:
    docker-compose -f .\docker-compose.yml -f .\docker-compose.overrides.yml down
 
-6. Run commands to remove all:
-   docker stop $(docker ps -aq)
-   docker rm $(docker ps -aq)
-   docker rmi $(docker images -q)
+6. Create mongoclient:
+	docker run -d -p 3000:3000 mongoclient/mongoclient
+
+7. Run commands to remove all:
+	docker ps -aq
+	docker stop $(docker ps -aq)
+	docker rm $(docker ps -aq)
+	docker rmi $(docker images -q) -f
+	docker system prune
