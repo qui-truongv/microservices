@@ -6,12 +6,13 @@ namespace Basket.API.Entities
     {
         public ShoppingCart()
         {
-
+            this.Items = new List<ShoppingCartItem>();
         }
 
         public ShoppingCart(string userName)
         {
             this.UserName = userName;
+            this.Items = new List<ShoppingCartItem>();
         }
 
         public string UserName { get; set; }
@@ -23,9 +24,12 @@ namespace Basket.API.Entities
             get
             {
                 decimal totalPrice = 0;
-                foreach (var item in Items)
+                if(Items != null)
                 {
-                    totalPrice += item.Price * item.Quantity;
+                    foreach (var item in Items)
+                    {
+                        totalPrice += item.Price * item.Quantity;
+                    }
                 }
                 return totalPrice;
             }
