@@ -34,10 +34,11 @@ namespace Discount.API.Controllers
             return isSuccess ? CreatedAtRoute("GetDiscount", new {productName = coupon.ProductName }, coupon) : NotFound();
         }
 
-        public async Task<ActionResult> UpdateDiscount(Coupon coupon)
+        [HttpPut]
+        [ProducesResponseType(typeof(Coupon), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Coupon>> UpdateDiscount([FromBody] Coupon coupon)
         {
-            var isSuccess = await _repository.UpdateDiscount(coupon);
-            return isSuccess ? Ok() : NotFound();
+            return Ok(await _repository.UpdateDiscount(coupon));
         }
 
         [HttpDelete("{productName}", Name ="DeleteDiscount")]
